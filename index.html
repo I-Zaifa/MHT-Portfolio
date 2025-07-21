@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Huzaifa · Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                DEFAULT: '#059669', // emerald‑600
+                light: '#10b981',
+                dark: '#047857',
+              },
+            },
+            fontFamily: {
+              sans: ['Inter', 'ui‑sans‑serif', 'system‑ui'],
+              mono: ['Fira Code', 'monospace'],
+            },
+          },
+        },
+      };
+    </script>
+    <!-- Lucide icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <!-- Plotly for charts -->
+    <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+    <!-- AOS (Animate on scroll) -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <style>
+      /* Fade‑in body */
+      body {opacity: 0; transition: opacity .4s ease‑in‑out;}
+      body.loaded {opacity: 1;}
+      /* Underline nav animation */
+      .nav‑link {position: relative;}
+      .nav‑link::after {
+        content: ""; position: absolute; bottom: -2px; left: 0; width: 0%; height: 2px;
+        background: currentColor; transition: width .3s ease;
+      }
+      .nav‑link:hover::after {width: 100%;}
+    </style>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23059669'><text x='4' y='18' font-size='18' font-family='Arial' font-weight='700'>H</text></svg>" />
+  </head>
+  <body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-200 selection:bg-primary/30" onload="document.body.classList.add('loaded');AOS.init({once:true});">
+    <!-- Header -->
+    <header class="fixed inset-x-0 top-0 z-50 bg-white/70 dark:bg-gray-900/70 backdrop-blur shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-14">
+        <a href="#top" class="text-lg font-bold tracking-wide">Huzaifa</a>
+        <nav class="hidden md:flex space-x-6 text-sm font-medium">
+          <a href="#about" class="nav-link hover:text-primary">About</a>
+          <a href="#skills" class="nav-link hover:text-primary">Skills</a>
+          <a href="#projects" class="nav-link hover:text-primary">Projects</a>
+          <a href="#contact" class="nav-link hover:text-primary">Contact</a>
+          <button id="themeToggle" aria-label="Toggle Dark" class="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800"><i data-lucide="moon" class="inline-block dark:hidden"></i><i data-lucide="sun" class="hidden dark:inline-block"></i></button>
+        </nav>
+        <!-- Mobile -->
+        <button id="mobileBtn" class="md:hidden p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800" aria-label="Open Menu"><i data-lucide="menu"></i></button>
+      </div>
+      <div id="mobileMenu" class="md:hidden hidden px-4 pb-4 space-y-2 text-sm">
+        <a href="#about" class="block hover:text-primary">About</a>
+        <a href="#skills" class="block hover:text-primary">Skills</a>
+        <a href="#projects" class="block hover:text-primary">Projects</a>
+        <a href="#contact" class="block hover:text-primary">Contact</a>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="relative pt-32 pb-24 bg-gradient-to-br from-green-100 via-white to-blue-100 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800" id="top">
+      <img src="https://images.unsplash.com/photo-1556157382-97eda4aab32b?auto=format&fit=crop&w=1200&q=60" alt="code background" class="absolute inset-0 w-full h-full object-cover opacity-10 dark:opacity-5 pointer-events-none" />
+      <div class="relative z-10 max-w-3xl mx-auto px-4 text-center" data-aos="fade-up">
+        <h1 class="text-5xl font-extrabold tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-400">Huzaifa</h1>
+        <p class="text-lg sm:text-xl text-gray-700 dark:text-gray-300">Economics & Finance student · ML / Robotics enthusiast · Islamabad</p>
+        <div class="mt-6 flex justify-center space-x-4 text-primary" data-aos="zoom-in" data-aos-delay="200">
+          <a href="https://github.com/your-github" target="_blank" class="flex items-center gap-1 hover:underline"><i data-lucide="github"></i>GitHub</a>
+          <a href="https://linkedin.com/in/your-linkedin" target="_blank" class="flex items-center gap-1 hover:underline"><i data-lucide="linkedin"></i>LinkedIn</a>
+          <a href="mailto:huzaifa@example.com" class="flex items-center gap-1 hover:underline"><i data-lucide="mail"></i>Email</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-20" data-aos="fade-up">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 class="text-3xl font-semibold mb-6">About Me</h2>
+        <p class="leading-relaxed text-gray-700 dark:text-gray-400">I am a B.S. candidate in Economics & Finance at NUML University (expected 2025), blending economics insight with hands-on machine‑learning. I craft clean data pipelines, prototype models, and explore the frontier where AI meets robotics to solve meaningful problems.</p>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="py-20 bg-gray-50 dark:bg-gray-800/40" data-aos="fade-up">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-semibold text-center mb-12">Skills</h2>
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="p-8 bg-white dark:bg-gray-800 rounded-2xl shadow group hover:shadow-lg transition duration-300">
+            <h3 class="font-semibold mb-3 flex items-center gap-1"><i data-lucide="code"></i>Programming & ML</h3>
+            <ul class="space-y-1 text-sm text-gray-700 dark:text-gray-300">
+              <li>Python, pandas, NumPy</li>
+              <li>scikit‑learn</li>
+              <li>PyTorch (basic)</li>
+            </ul>
+          </div>
+          <div class="p-8 bg-white dark:bg-gray-800 rounded-2xl shadow group hover:shadow-lg transition duration-300">
+            <h3 class="font-semibold mb-3 flex items-center gap-1"><i data-lucide="database"></i>Data Engineering</h3>
+            <ul class="space-y-1 text-sm text-gray-700 dark:text-gray-300">
+              <li>Cleaning & Normalisation</li>
+              <li>ETL pipelines</li>
+            </ul>
+          </div>
+          <div class="p-8 bg-white dark:bg-gray-800 rounded-2xl shadow group hover:shadow-lg transition duration-300">
+            <h3 class="font-semibold mb-3 flex items-center gap-1"><i data-lucide="settings"></i>Dev & Ops</h3>
+            <ul class="space-y-1 text-sm text-gray-700 dark:text-gray-300">
+              <li>Git & GitHub</li>
+              <li>Jupyter / VS Code</li>
+              <li>Linux, Docker</li>
+              <li>Airflow, MLflow (intro)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="py-24" data-aos="fade-up">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-semibold text-center mb-12">Projects</h2>
+        <div class="grid gap-12 lg:grid-cols-2">
+          <!-- SP500 project -->
+          <article class="group relative overflow-hidden rounded-2xl shadow-lg bg-white dark:bg-gray-800">
+            <img src="https://images.unsplash.com/photo-1515825832841-d7d2aaf6a177?auto=format&fit=crop&w=900&q=60" alt="S&P 500 graph" class="w-full h-56 object-cover transition duration-500 group-hover:scale-105" />
+            <div class="p-8 space-y-4">
+              <h3 class="text-2xl font-semibold">SP500AnalyzedtoX</h3>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Interactive toolkit dissecting S&P 500 trends with macro‑economic overlays.</p>
+              <div class="flex flex-wrap gap-2 text-xs">
+                <span class="px-2 py-1 bg-primary/10 text-primary rounded">Python</span>
+                <span class="px-2 py-1 bg-primary/10 text-primary rounded">Plotly</span>
+                <span class="px-2 py-1 bg-primary/10 text-primary rounded">pandas</span>
+              </div>
+              <a href="https://github.com/I-Zaifa/SP500AnalyzedtoX" target="_blank" class="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"><i data-lucide="external-link"></i>Repo</a>
+              <!-- Chart placeholder -->
+              <div id="sp500Chart" class="mt-6 h-64"></div>
+            </div>
+          </article>
+          <!-- Robotics sandbox -->
+          <article class="group relative overflow-hidden rounded-2xl shadow-lg bg-white dark:bg-gray-800 flex flex-col">
+            <div class="flex-1 flex items-center justify-center bg-gray-100 dark:bg-gray-700">
+              <img src="https://images.unsplash.com/photo-1504274066651-8d31a536b11a?auto=format&fit=crop&w=800&q=60" alt="robotics" class="h-40 object-cover" />
+            </div>
+            <div class="p-8 space-y-4">
+              <h3 class="text-2xl font-semibold">ROS Robotics Sandbox</h3>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Prototyping autonomous agents that bridge financial models with physical robotics using ROS 2.</p>
+              <span class="text-xs px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-600">In Progress</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hardware -->
+    <section class="py-20 bg-gray-50 dark:bg-gray-800/40" data-aos="fade-up">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 class="text-3xl font-semibold mb-6">Hardware Lab</h2>
+        <div class="grid gap-6 sm:grid-cols-2">
+          <ul class="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+            <li><strong>GPU:</strong> NVIDIA RTX 4060 Ti 16GB</li>
+            <li><strong>CPU:</strong> Intel Core i5‑12th Gen (F)</li>
+            <li><strong>RAM:</strong> 32 GB DDR5</li>
+          </ul>
+          <ul class="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
+            <li><strong>Storage:</strong> 500 GB NVMe SSD</li>
+            <li><strong>Monitors:</strong> MSI G274QPF E2 + HP E231i (vertical)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-24" data-aos="fade-up">
+      <div class="max-w-lg mx-auto px-4 text-center">
+        <h2 class="text-3xl font-semibold mb-6">Get in Touch</h2>
+        <form action="https://formspree.io/f/yourFormID" method="POST" class="grid gap-4">
+          <input type="text" name="name" placeholder="Name" required class="px-4 py-3 rounded border dark:border-gray-700 bg-white dark:bg-gray-800" />
+          <input type="email" name="email" placeholder="Email" required class="px-4 py-3 rounded border dark:border-gray-700 bg-white dark:bg-gray-800" />
+          <textarea name="message" rows="4" placeholder="Message" required class="px-4 py-3 rounded border dark:border-gray-700 bg-white dark:bg-gray-800"></textarea>
+          <button type="submit" class="justify-self-center px-8 py-3 rounded-full bg-primary text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary/50">Send</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-6 text-center text-xs text-gray-500 dark:text-gray-400">
+      © <span id="year"></span> Huzaifa — Built with ☕ + <a href="https://tailwindcss.com" class="hover:underline" target="_blank">Tailwind CSS</a>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+      // Icons
+      lucide.createIcons();
+
+      // Theme toggle
+      const htmlEl = document.documentElement;
+      document.getElementById('themeToggle').addEventListener('click', () => {
+        htmlEl.classList.toggle('dark');
+        localStorage.theme = htmlEl.classList.contains('dark') ? 'dark' : 'light';
+        lucide.createIcons();
+      });
+      if (localStorage.theme === 'dark') htmlEl.classList.add('dark');
+
+      // Mobile menu
+      const mobileBtn = document.getElementById('mobileBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+      // Year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Plotly sample chart (static demo data)
+      const x = Array.from({length: 30}, (_,i)=>`2024‑${String(i+1).padStart(2,'0')}`);
+      const y = x.map(()=> Math.round(Math.random()*200+4000));
+      Plotly.newPlot('sp500Chart', [{x, y, type:'scatter', mode:'lines', line:{width:2}, name:'S&P 500'}], {margin:{t:20,l:30,r:10,b:30}, paper_bgcolor:'transparent', plot_bgcolor:'transparent', font:{color: getComputedStyle(document.documentElement).getPropertyValue('--tw-text-opacity') }} , {displayModeBar:false});
+
+      // Re-render chart on theme switch
+      const redraw = () => Plotly.Plots.resize('sp500Chart');
+      window.addEventListener('resize', redraw);
+      document.getElementById('themeToggle').addEventListener('click', () => setTimeout(redraw,300));
+    </script>
+  </body>
+</html>
