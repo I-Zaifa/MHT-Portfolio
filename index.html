@@ -1,233 +1,278 @@
 <!DOCTYPE html>
-<!--
-===============================================================
-  Huzaifa ‑ Self‑Taught Machine Learning · Economics & Finance
-  Dark‑mode portfolio with subtle neon vibes
-  Single‑file (~500 lines) · No external images
-===============================================================
--->
+<!-- ====================================================================
+     Huzaifa | Self‑Taught Machine Learning · Economics & Finance Portfolio
+     Dark minimalist aesthetic, subtle desaturated‑blue accent — single file
+     TailwindCSS + vanilla JS. No external images.
+==================================================================== -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Huzaifa | ML · Econ & Finance</title>
-  <!-- Tailwind CSS (CDN) -->
+  <title>Huzaifa — ML · Econ & Finance Portfolio</title>
+  <!-- TailwindCSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    /* ---------------------------------------------------------
-       Tailwind custom theme: dark with neon accent
-       --------------------------------------------------------- */
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
           colors: {
-            neon: '#39ff14',      /* primary accent */
-            base: '#0d0d0d',      /* background */
-            surface: '#181A1B',   /* card surface */
+            base:    '#0e1118',  // page background
+            surface: '#161b22',  // cards & navbar
+            muted:   '#202632',  // section alt
+            accent:  '#4f7cff',  // primary blue accent
+            accent2: '#7c9cff',  // lighter hover accent
           },
           boxShadow: {
-            neon: '0 0 10px #39ff14, 0 0 20px #39ff14',
+            soft: '0 0 0 1px rgba(79,124,255,0.25), 0 4px 14px rgba(0,0,0,0.4)',
           },
           fontFamily: {
-            mono: ['Fira Code', 'monospace'],
+            display: ['Inter', 'sans-serif'],
+            mono:    ['Fira Code', 'monospace'],
           },
         },
       },
-    }
+    };
   </script>
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
-    /* ---------- Neon glow helpers ---------- */
-    .neon-text {
-      color: #39ff14;
-      text-shadow: 0 0 8px #39ff14, 0 0 16px #39ff14;
-    }
-    .neon-border {
-      box-shadow: 0 0 3px #39ff14 inset, 0 0 8px #39ff14;
-    }
+    html { scroll-behavior: smooth; }
+    .link-accent { @apply hover:text-accent2 transition-colors; }
+    :focus-visible { outline:2px solid theme('colors.accent'); outline-offset:2px; }
   </style>
 </head>
-<body class="dark bg-base text-gray-200 font-sans leading-relaxed selection:bg-neon selection:text-black">
-  <!-- ======================================================= -->
-  <!-- NAVBAR -->
-  <!-- ======================================================= -->
-  <nav class="fixed top-0 w-full z-50 bg-base/90 backdrop-blur shadow-md">
-    <div class="max-w-5xl mx-auto flex justify-between items-center p-4">
-      <span class="text-lg sm:text-xl md:text-2xl font-extrabold tracking-wider neon-text">HUZAIFA</span>
-      <ul class="flex space-x-5 md:space-x-8 font-mono text-sm sm:text-base">
-        <li><a class="hover:text-neon" href="#about">about</a></li>
-        <li><a class="hover:text-neon" href="#skills">skills</a></li>
-        <li><a class="hover:text-neon" href="#projects">projects</a></li>
-        <li><a class="hover:text-neon" href="#education">education</a></li>
-        <li><a class="hover:text-neon" href="#contact">contact</a></li>
-        <li>
-          <button id="darkToggle" class="px-2 py-1 rounded neon-border text-neon hover:bg-neon hover:text-black transition-all" title="toggle theme">☀︎/☾</button>
-        </li>
+<body class="bg-base text-gray-200 font-display leading-relaxed selection:bg-accent selection:text-black dark">
+
+  <!-- =========================== NAVBAR ============================ -->
+  <nav class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur border-b border-muted shadow-soft">
+    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <span class="text-xl sm:text-2xl font-extrabold tracking-wide text-accent">HUZAIFA</span>
+      <ul class="hidden md:flex space-x-8 text-sm font-semibold">
+        <li><a href="#about"    class="link-accent">About</a></li>
+        <li><a href="#skills"   class="link-accent">Skills</a></li>
+        <li><a href="#projects" class="link-accent">Projects</a></li>
+        <li><a href="#journey"  class="link-accent">Journey</a></li>
+        <li><a href="#education"class="link-accent">Education</a></li>
+        <li><a href="#contact"  class="link-accent">Contact</a></li>
       </ul>
+      <button id="themeToggle" class="ml-4 p-2 rounded-md border border-accent text-accent hover:bg-accent hover:text-base transition-colors" title="toggle theme">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 18a6 6 0 110-12 6 6 0 010 12zm0-16a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zm0 18a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zm11-9a1 1 0 010 2h-2a1 1 0 110-2h2zM5 11a1 1 0 010 2H3a1 1 0 110-2h2zm14.657-7.657a1 1 0 011.414 1.414L20.414 6.414a1 1 0 11-1.414-1.414l1.657-1.657zM4.343 17.657a1 1 0 011.414 1.414L4.1 20.414a1 1 0 11-1.414-1.414l1.657-1.657zM4.343 4.343a1 1 0 011.414 0L7.414 6.0a1 1 0 01-1.414 1.414L4.343 5.757a1 1 0 010-1.414zm15.557 13.314a1 1 0 011.414 0l1.657 1.657a1 1 0 01-1.414 1.414l-1.657-1.657a1 1 0 010-1.414z"/></svg>
+      </button>
     </div>
   </nav>
 
-  <main class="pt-24 max-w-5xl mx-auto px-5">
-    <!-- =================================================== -->
-    <!-- ABOUT -->
-    <!-- =================================================== -->
-    <section id="about" class="my-24">
-      <h1 class="text-4xl sm:text-5xl font-extrabold mb-6 neon-text">Self‑Taught · Data‑Driven · Impact‑Minded</h1>
-      <p class="text-lg sm:text-xl max-w-3xl">
-        I’m <span class="font-semibold">Huzaifa</span>—an economics & finance senior (NUML ’25) who taught himself <span class="neon-text font-semibold">Python</span>, machine learning, and data science from scratch. I fuse quantitative
-        rigor with curiosity to build models that <em>explain</em> and <em>predict</em> market dynamics. When I’m not wrangling datasets, you’ll find me tuning hyperparameters, dissecting macro indicators, or hunting for the perfect espresso.
+  <main class="pt-28 md:pt-32 max-w-7xl mx-auto px-6">
+
+    <!-- =========================== HERO ============================ -->
+    <section class="my-28 text-center">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-accent mb-6 leading-tight">Markets Through a Data Lens</h1>
+      <p class="text-lg sm:text-xl max-w-3xl mx-auto">Self‑taught machine‑learning practitioner and final‑year Economics &amp; Finance student turning messy datasets into actionable market insight.</p>
+      <div class="mt-10 flex justify-center gap-4 flex-wrap font-mono text-sm">
+        <a href="https://github.com/I-Zaifa"             target="_blank" class="px-4 py-2 border border-accent rounded shadow-soft hover:bg-accent hover:text-base transition-colors">GitHub</a>
+        <a href="https://linkedin.com/in/huzaifatariq33" target="_blank" class="px-4 py-2 border border-accent rounded shadow-soft hover:bg-accent hover:text-base transition-colors">LinkedIn</a>
+        <a href="mailto:huzaifazerothree@gmail.com"                   class="px-4 py-2 border border-accent rounded shadow-soft hover:bg-accent hover:text-base transition-colors">Email</a>
+      </div>
+    </section>
+
+    <!-- ========================== COUNTERS ========================= -->
+    <section class="my-24 grid sm:grid-cols-3 gap-10 text-center">
+      <div class="bg-surface border border-muted rounded-xl p-6 shadow-soft">
+        <div id="counter-hours"  class="text-4xl font-extrabold text-accent mb-2">0</div>
+        <p class="uppercase tracking-wide text-gray-400 text-sm">Hours Self‑Study</p>
+      </div>
+      <div class="bg-surface border border-muted rounded-xl p-6 shadow-soft">
+        <div id="counter-lines"  class="text-4xl font-extrabold text-accent mb-2">0</div>
+        <p class="uppercase tracking-wide text-gray-400 text-sm">Lines of Code</p>
+      </div>
+      <div class="bg-surface border border-muted rounded-xl p-6 shadow-soft">
+        <div id="counter-models" class="text-4xl font-extrabold text-accent mb-2">0</div>
+        <p class="uppercase tracking-wide text-gray-400 text-sm">Models Trained</p>
+      </div>
+    </section>
+
+    <!-- ============================ ABOUT ========================== -->
+    <section id="about" class="my-28">
+      <h2 class="text-3xl sm:text-4xl font-bold text-accent mb-10">About Me</h2>
+      <p class="text-lg leading-8 max-w-4xl">
+        Islamabad‑born, forged in online forums and open‑source repos. I built my own curriculum when coursework lagged—blending programming, statistics, and economic theory into a toolkit for decoding markets. Whether prototyping in Jupyter or refining research in LaTeX, I pursue a single metric: <em>clarity that informs action</em>.
       </p>
-      <div class="mt-6 flex flex-wrap gap-6 font-mono text-sm">
-        <a href="https://github.com/I-Zaifa" target="_blank" class="neon-border rounded px-3 py-2 hover:bg-neon hover:text-black transition-all">GitHub</a>
-        <a href="https://linkedin.com/in/huzaifatariq33" target="_blank" class="neon-border rounded px-3 py-2 hover:bg-neon hover:text-black transition-all">LinkedIn</a>
-        <a href="mailto:huzaifazerothree@gmail.com" class="neon-border rounded px-3 py-2 hover:bg-neon hover:text-black transition-all">Email Me</a>
-      </div>
+      <p class="mt-6 text-lg max-w-4xl">
+        Off‑hours, you’ll find me over‑analyzing game economies, caffeinating past midnight, or speed‑reading financial history for deeper context.
+      </p>
     </section>
 
-    <!-- =================================================== -->
-    <!-- SKILLS -->
-    <!-- =================================================== -->
-    <section id="skills" class="my-24">
-      <h2 class="text-3xl font-bold mb-10 neon-text">tools of the trade</h2>
-      <div class="grid sm:grid-cols-2 gap-10">
+    <!-- ============================ SKILLS ========================= -->
+    <section id="skills" class="my-28">
+      <h2 class="text-3xl sm:text-4xl font-bold text-accent mb-12">Skill Stack</h2>
+      <div class="grid lg:grid-cols-3 gap-12">
         <div>
-          <h3 class="text-xl font-semibold mb-4">Programming · Data · ML</h3>
-          <!-- Animated skill bars -->
-          <ul class="space-y-4">
-            <li class="flex items-center justify-between"><span>Python</span><span class="font-mono">★★★★☆</span></li>
-            <li class="flex items-center justify-between"><span>pandas & NumPy</span><span class="font-mono">★★★★☆</span></li>
-            <li class="flex items-center justify-between"><span>scikit‑learn</span><span class="font-mono">★★★★☆</span></li>
-            <li class="flex items-center justify-between"><span>PyTorch</span><span class="font-mono">★★★☆☆</span></li>
-            <li class="flex items-center justify-between"><span>Plotly</span><span class="font-mono">★★★★☆</span></li>
+          <h3 class="text-xl font-semibold mb-4">Programming · Data Science</h3>
+          <ul class="space-y-3">
+            <li class="flex justify-between"><span>Python</span><span class="font-mono">★★★★★</span></li>
+            <li class="flex justify-between"><span>pandas &amp; NumPy</span><span class="font-mono">★★★★★</span></li>
+            <li class="flex justify-between"><span>scikit‑learn</span><span class="font-mono">★★★★☆</span></li>
+            <li class="flex justify-between"><span>PyTorch</span><span class="font-mono">★★★☆☆</span></li>
+            <li class="flex justify-between"><span>Plotly / matplotlib</span><span class="font-mono">★★★★☆</span></li>
           </ul>
         </div>
         <div>
-          <h3 class="text-xl font-semibold mb-4">Economics · Finance</h3>
+          <h3 class="text-xl font-semibold mb-4">Economics · Finance</h3>
           <ul class="list-disc list-inside space-y-2">
-            <li>Financial time‑series modelling</li>
-            <li>Macroeconomic research &amp; forecasting</li>
-            <li>Risk analysis &amp; portfolio theory</li>
+            <li>Time‑series econometrics</li>
+            <li>Macro modelling (DSGE)</li>
+            <li>Risk metrics (VaR, CVaR)</li>
             <li>Equity valuation &amp; DCF</li>
-            <li>Econometrics &amp; statistical inference</li>
+            <li>Portfolio theory &amp; CAPM</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold mb-4">Tools &amp; Workflow</h3>
+          <ul class="list-disc list-inside space-y-2">
+            <li>VS Code · Jupyter</li>
+            <li>Git &amp; GitHub Actions</li>
+            <li>Docker (basic)</li>
+            <li>Linux/WSL</li>
+            <li>LaTeX for publications</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- =================================================== -->
-    <!-- PROJECTS -->
-    <!-- =================================================== -->
-    <section id="projects" class="my-24">
-      <h2 class="text-3xl font-bold mb-10 neon-text">showcase projects</h2>
-      <p class="mb-8">Tap a card for details.</p>
+    <!-- ============================ PROJECTS ======================= -->
+    <section id="projects" class="my-28">
+      <h2 class="text-3xl sm:text-4xl font-bold text-accent mb-12">Featured Work</h2>
+      <p class="mb-6 text-gray-400">Click a card for details.</p>
       <div class="space-y-8">
-        <!-- ========= SP500AnalyzedtoX (FEATURED) ========= -->
-        <div class="project-card bg-surface rounded-xl p-6 neon-border cursor-pointer transition-transform hover:scale-[1.03]" onclick="toggle('sp500')">
-          <div class="flex justify-between items-center">
-            <h3 class="text-2xl font-bold">SP500AnalyzedtoX</h3>
-            <span id="sp500-chevron" class="text-lg">▸</span>
+        <!-- SP500AnalyzedtoX -->
+        <article class="project-card bg-surface border border-muted rounded-2xl p-8 shadow-soft cursor-pointer transition-transform hover:scale-[1.02]" onclick="toggleProject('sp500')">
+          <header class="flex justify-between items-center">
+            <h3 class="text-2xl font-semibold">SP500AnalyzedtoX</h3>
+            <span id="sp500-icon" class="text-accent text-xl">▼</span>
+          </header>
+          <div id="sp500" class="mt-4">
+            <p>An end‑to‑end toolkit dissecting S&amp;P 500 behaviour with macro overlay, anomaly detection, and Monte Carlo scenario stress‑testing. Interactive dashboards built with Plotly.</p>
+            <p class="mt-2"><span class="font-semibold">Stack:</span> Python · pandas · scikit‑learn · Plotly · statsmodels</p>
+            <a href="https://github.com/I-Zaifa/SP500AnalyzedtoX" target="_blank" class="inline-block mt-2 underline link-accent">View Repository</a>
           </div>
-          <div id="sp500-detail" class="mt-4 hidden">
-            <p>Interactive toolkit dissecting S&amp;P 500 dynamics with macro overlays, anomaly detection, and scenario simulation.</p>
-            <p class="mt-2"><span class="font-semibold">Stack:</span> Python · pandas · Plotly · scikit‑learn</p>
-            <a href="https://github.com/I-Zaifa/SP500AnalyzedtoX" target="_blank" class="inline-block mt-2 underline">View Source</a>
+        </article>
+        <!-- Regression Comparison -->
+        <article class="project-card bg-surface border border-muted rounded-2xl p-8 shadow-soft cursor-pointer transition-transform hover:scale-[1.02]" onclick="toggleProject('reg')">
+          <header class="flex justify-between items-center">
+            <h3 class="text-xl font-semibold">Regression Analysis Comparison</h3>
+            <span id="reg-icon" class="text-accent text-xl">▶</span>
+          </header>
+          <div id="reg" class="mt-4 hidden">
+            <p>Benchmarked Linear, Lasso, Random Forest, XGBoost &amp; ARIMA models against macro factors to stress performance across differing economic regimes.</p>
+            <a href="https://github.com/I-Zaifa/Regression-Analysis-Comparison" target="_blank" class="inline-block mt-2 underline link-accent">View Repository</a>
           </div>
-        </div>
-        <!-- ========= Regression Analysis ========= -->
-        <div class="project-card bg-surface rounded-xl p-6 neon-border cursor-pointer transition-transform hover:scale-[1.03]" onclick="toggle('reg')">
-          <div class="flex justify-between items-center">
-            <h3 class="text-xl font-semibold">Regression Analysis Comparison</h3>
-            <span id="reg-chevron" class="text-lg">▸</span>
-          </div>
-          <div id="reg-detail" class="mt-4 hidden">
-            <p>Benchmarked Linear, Lasso, Random Forest, XGBoost &amp; ARIMA for stock price prediction against macro factors.</p>
-            <a href="https://github.com/I-Zaifa/Regression-Analysis-Comparison" target="_blank" class="inline-block mt-2 underline">View Source</a>
-          </div>
-        </div>
-        <!-- ========= Sentiment ========= -->
-        <div class="project-card bg-surface rounded-xl p-6 neon-border cursor-pointer transition-transform hover:scale-[1.03]" onclick="toggle('sent')">
-          <div class="flex justify-between items-center">
+        </article>
+        <!-- Sentiment × Linear Regression -->
+        <article class="project-card bg-surface border border-muted rounded-2xl p-8 shadow-soft cursor-pointer transition-transform hover:scale-[1.02]" onclick="toggleProject('sent')">
+          <header class="flex justify-between items-center">
             <h3 class="text-xl font-semibold">Sentiment × Linear Regression</h3>
-            <span id="sent-chevron" class="text-lg">▸</span>
+            <span id="sent-icon" class="text-accent text-xl">▶</span>
+          </header>
+          <div id="sent" class="mt-4 hidden">
+            <p>NLP‑driven sentiment scoring on financial news combined with linear regression on price data for enhanced trading signals.</p>
+            <a href="https://github.com/I-Zaifa/LinearRegressionSentimentAnalysis" target="_blank" class="inline-block mt-2 underline link-accent">View Repository</a>
           </div>
-          <div id="sent-detail" class="mt-4 hidden">
-            <p>NLP sentiment on financial news combined with regression for enhanced trading signal generation.</p>
-            <a href="https://github.com/I-Zaifa/LinearRegressionSentimentAnalysis" target="_blank" class="inline-block mt-2 underline">View Source</a>
-          </div>
-        </div>
+        </article>
       </div>
     </section>
 
-    <!-- =================================================== -->
-    <!-- EDUCATION -->
-    <!-- =================================================== -->
-    <section id="education" class="my-24">
-      <h2 class="text-3xl font-bold mb-10 neon-text">education</h2>
-      <div class="bg-surface neon-border rounded-xl p-6">
+    <!-- ============================ JOURNEY ======================== -->
+    <section id="journey" class="my-28">
+      <h2 class="text-3xl sm:text-4xl font-bold text-accent mb-12">Learning Journey</h2>
+      <ol class="relative border-l border-accent pl-6 space-y-10">
+        <li>
+          <div class="absolute -left-3 top-0 w-3 h-3 bg-accent rounded-full"></div>
+          <time class="text-accent font-semibold">2021</time>
+          <p class="mt-2">Discovered Python via free MOOCs; automated tedious finance homework scripts.</p>
+        </li>
+        <li>
+          <div class="absolute -left-3 top-0 w-3 h-3 bg-accent rounded-full"></div>
+          <time class="text-accent font-semibold">2022</time>
+          <p class="mt-2">Dove into machine learning—completed fast.ai, built my first stock‑price predictor (terrible MSE, great lesson).</p>
+        </li>
+        <li>
+          <div class="absolute -left-3 top-0 w-3 h-3 bg-accent rounded-full"></div>
+          <time class="text-accent font-semibold">2023</time>
+          <p class="mt-2">Published a research poster on macro indicators vs. equities; launched SP500AnalyzedtoX.</p>
+        </li>
+        <li>
+          <div class="absolute -left-3 top-0 w-3 h-3 bg-accent rounded-full"></div>
+          <time class="text-accent font-semibold">2024–25</time>
+          <p class="mt-2">Exploring NLP sentiment + time‑series fusion while finishing B.S. thesis on ML‑driven macro forecasting.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============================ EDUCATION ===================== -->
+    <section id="education" class="my-28">
+      <h2 class="text-3xl sm:text-4xl font-bold text-accent mb-12">Education</h2>
+      <div class="bg-surface border border-muted rounded-xl p-8 shadow-soft">
         <p class="text-lg font-semibold">B.S. Economics &amp; Finance — NUML University, Islamabad</p>
         <p class="text-sm text-gray-400">Expected 2025 · CGPA 3.8</p>
-        <p class="mt-3">Notable coursework: Quantitative Methods, Econometrics, Machine Learning for Finance, Corporate Finance, Applied Statistics.</p>
+        <p class="mt-3">Key courses: Quantitative Methods, Econometrics, Machine Learning for Finance, Corporate Finance, Applied Statistics.</p>
       </div>
     </section>
 
-    <!-- =================================================== -->
-    <!-- CONTACT -->
-    <!-- =================================================== -->
-    <section id="contact" class="my-24">
-      <h2 class="text-3xl font-bold mb-8 neon-text">contact</h2>
-      <div class="bg-surface neon-border rounded-xl p-6">
-        <p class="mb-4">Got a project, research collaboration, or a bold idea? Drop a line—I read every email.</p>
-        <a href="mailto:huzaifazerothree@gmail.com" class="font-mono underline text-neon text-lg">huzaifazerothree@gmail.com</a>
+    <!-- ============================ CONTACT ======================= -->
+    <section id="contact" class="my-28">
+      <h2 class="text-3xl sm:text-4xl font-bold text-accent mb-8">Contact</h2>
+      <div class="bg-surface border border-muted rounded-xl p-8 shadow-soft">
+        <p class="mb-4">Have an idea, research collaboration, or role where data science meets finance? Drop me a line—let’s build something impactful.</p>
+        <a href="mailto:huzaifazerothree@gmail.com" class="font-mono underline text-accent text-lg">huzaifazerothree@gmail.com</a>
       </div>
     </section>
   </main>
 
-  <!-- ======================================================= -->
-  <!-- FOOTER -->
-  <!-- ======================================================= -->
-  <footer class="text-center text-xs text-gray-500 py-8 border-t border-surface">
-    <p>© 2025 Huzaifa · Built with vanilla HTML + Tailwind + a sprinkle of JS · Crafted at midnight with ☕</p>
+  <!-- ============================ FOOTER ======================== -->
+  <footer class="text-center text-xs text-gray-500 py-10 border-t border-muted">
+    © 2025 Huzaifa — Crafted with black coffee &amp; Tailwind.
   </footer>
 
-  <!-- ======================================================= -->
-  <!-- SCRIPTS -->
-  <!-- ======================================================= -->
+  <!-- ============================ SCRIPTS ======================= -->
   <script>
-    /* -----------------------------------------------------
-       Theme toggle — stores state in localStorage
-    ----------------------------------------------------- */
-    const html = document.documentElement;
-    const toggleBtn = document.getElementById('darkToggle');
-    const userPref = localStorage.getItem('theme');
-    if (userPref === 'dark' || (!userPref && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      html.classList.add('dark');
-    }
-    toggleBtn.addEventListener('click', () => {
-      html.classList.toggle('dark');
-      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    /* Theme toggle --------------------------------------------------- */
+    const htmlEl = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme === 'light') htmlEl.classList.remove('dark');
+    themeToggle.addEventListener('click', () => {
+      htmlEl.classList.toggle('dark');
+      localStorage.setItem('theme', htmlEl.classList.contains('dark') ? 'dark' : 'light');
     });
 
-    /* -----------------------------------------------------
-       Project card accordion toggle
-    ----------------------------------------------------- */
-    function toggle(key) {
-      const detail = document.getElementById(key + '-detail');
-      const chev   = document.getElementById(key + '-chevron');
-      const open   = detail.classList.toggle('hidden') === false;
-      chev.textContent = open ? '▾' : '▸';
-    }
-
-    /* -----------------------------------------------------
-       Simple neon pulse on hover for .project-card
-    ----------------------------------------------------- */
-    document.querySelectorAll('.project-card').forEach(card => {
-      card.addEventListener('mouseenter', () => card.classList.add('shadow-neon'));
-      card.addEventListener('mouseleave', () => card.classList.remove('shadow-neon'));
+    /* Counters ------------------------------------------------------- */
+    const counters = [
+      { id: 'counter-hours',  target: 4000 },
+      { id: 'counter-lines',  target: 120000 },
+      { id: 'counter-models', target: 85 },
+    ];
+    const duration = 2000;
+    counters.forEach(({ id, target }) => {
+      const el = document.getElementById(id);
+      let start = 0;
+      const incr = target / (duration / 16);
+      const tick = () => {
+        start += incr;
+        if (start < target) {
+          el.textContent = Math.floor(start);
+          requestAnimationFrame(tick);
+        } else {
+          el.textContent = target.toLocaleString();
+        }
+      };
+      tick();
     });
+
+    /* Project accordion --------------------------------------------- */
+    function toggleProject(key) {
+      const detail = document.getElementById(key);
+      const icon   = document.getElementById(key + '-icon');
+      const isHidden = detail.classList.toggle('hidden');
+      icon.textContent = isHidden ? '▶' : '▼';
+    }
   </script>
-
 </body>
 </html>
