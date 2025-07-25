@@ -1,278 +1,240 @@
 <!DOCTYPE html>
-<!-- ====================================================================
-     Huzaifa | Self‑Taught Machine Learning · Economics & Finance Portfolio
-     Dark minimalist aesthetic, subtle desaturated‑blue accent — single file
-     TailwindCSS + vanilla JS. No external images.
-==================================================================== -->
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Huzaifa — ML · Econ & Finance Portfolio</title>
-  <!-- TailwindCSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            base:    '#0e1118',  // page background
-            surface: '#161b22',  // cards & navbar
-            muted:   '#202632',  // section alt
-            accent:  '#4f7cff',  // primary blue accent
-            accent2: '#7c9cff',  // lighter hover accent
-          },
-          boxShadow: {
-            soft: '0 0 0 1px rgba(79,124,255,0.25), 0 4px 14px rgba(0,0,0,0.4)',
-          },
-          fontFamily: {
-            display: ['Inter', 'sans-serif'],
-            mono:    ['Fira Code', 'monospace'],
-          },
-        },
-      },
-    };
-  </script>
-  <style>
-    html { scroll-behavior: smooth; }
-    .link-accent { @apply hover:text-accent2 transition-colors; }
-    :focus-visible { outline:2px solid theme('colors.accent'); outline-offset:2px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Huzaifa – Portfolio</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --highlight: #4c51bf;
+    --text-primary: #e2e8f0;
+    --text-secondary: #a0aec0;
+    --card-gap: 1.5rem;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    display: flex;
+  }
+  aside {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100vh;
+    background-color: var(--surface);
+    padding: 2rem 1rem;
+    overflow-y: auto;
+    border-left: 1px solid #2d3748;
+  }
+  aside h2 { margin-bottom: 0.75rem; font-size: 1.25rem; color: var(--highlight); }
+  aside ul { list-style: none; }
+  aside li { margin-bottom: 0.5rem; }
+  aside a { color: var(--text-primary); text-decoration: none; transition: color 0.2s ease; }
+  aside a:hover { color: var(--highlight); }
+  main {
+    flex: 1;
+    max-width: calc(100% - 280px);
+    padding: 2rem 3rem;
+  }
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 1.5rem;
+  }
+  header img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--highlight);
+  }
+  header .intro { flex: 1; }
+  header h1 { font-size: 2.25rem; margin-bottom: 0.25rem; }
+  header p { font-size: 1rem; color: var(--text-secondary); }
+  section { margin-bottom: 2.5rem; }
+  section h2 { font-size: 1.75rem; margin-bottom: 1rem; color: var(--highlight); }
+  .skills-grid { display: flex; flex-wrap: wrap; gap: 1rem; }
+  .skills-grid span {
+    background-color: #2d3748;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+  }
+  .projects { display: flex; flex-direction: column; gap: var(--card-gap); }
+  .project-card {
+    background-color: var(--surface);
+    padding: 1.5rem;
+    border-radius: 6px;
+    border: 1px solid #2d3748;
+  }
+  .project-card h3 { margin-bottom: 0.75rem; font-size: 1.25rem; color: var(--highlight); }
+  .project-card p { font-size: 0.95rem; color: var(--text-secondary); }
+  .languages-list, .interests-list { list-style: none; padding-left: 0; }
+  .languages-list li, .interests-list li { margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--text-secondary); }
+  .contact-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 1.25rem;
+    background-color: var(--highlight);
+    color: var(--text-primary);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  .contact-btn:hover { background-color: #6b7cff; }
+  @media (max-width: 900px) {
+    body { flex-direction: column; }
+    aside {
+      position: relative;
+      width: 100%;
+      height: auto;
+      border-left: none;
+      border-top: 1px solid #2d3748;
+    }
+    main { max-width: 100%; padding: 2rem 1.5rem; }
+  }
+</style>
 </head>
-<body class="bg-base text-gray-200 font-display leading-relaxed selection:bg-accent selection:text-black dark">
+<body>
+  <main>
+    <header>
+      <img src="04c17c51-93b2-4e1b-9edc-e1f8deceb299.png" alt="Profile placeholder">
+      <div class="intro">
+        <h1>Huzaifa</h1>
+        <p>Islamabad, Pakistan</p>
+        <p>I'm a BS Economics &amp; Finance candidate at NUML, building and sharing practical Python and ML projects. If it’s useful or fun, it’s worth doing. Gaming, movies, and tinkering in Python fill the rest.</p>
+      </div>
+    </header>
 
-  <!-- =========================== NAVBAR ============================ -->
-  <nav class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur border-b border-muted shadow-soft">
-    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-      <span class="text-xl sm:text-2xl font-extrabold tracking-wide text-accent">HUZAIFA</span>
-      <ul class="hidden md:flex space-x-8 text-sm font-semibold">
-        <li><a href="#about"    class="link-accent">About</a></li>
-        <li><a href="#skills"   class="link-accent">Skills</a></li>
-        <li><a href="#projects" class="link-accent">Projects</a></li>
-        <li><a href="#journey"  class="link-accent">Journey</a></li>
-        <li><a href="#education"class="link-accent">Education</a></li>
-        <li><a href="#contact"  class="link-accent">Contact</a></li>
+    <section id="skills">
+      <h2>Technical Skills</h2>
+      <div class="skills-grid">
+        <span>Python</span>
+        <span>Pandas</span>
+        <span>NumPy</span>
+        <span>scikit‑learn</span>
+        <span>PyTorch</span>
+        <span>XGBoost</span>
+        <span>Statsmodels</span>
+        <span>Flask</span>
+        <span>yFinance</span>
+        <span>FredAPI</span>
+        <span>Matplotlib</span>
+        <span>Seaborn</span>
+        <span>NLTK</span>
+        <span>FuzzyWuzzy</span>
+        <span>Tkinter</span>
+        <span>Jupyter Notebook</span>
+        <span>Git &amp; Version Control</span>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+      <p>B.S. Economics &amp; Finance, NUML University, Islamabad — Expected 2025</p>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects">
+        <div class="project-card">
+          <h3>MHT‑Portfolio</h3>
+          <p>A personal portfolio website built by Huzaifa to showcase his work and skills.</p>
+        </div>
+        <div class="project-card">
+          <h3>MovieRecommendation4000</h3>
+          <p>Generates movie recommendations based on a user’s favourite films by comparing genre, duration, ratings and year of release. It uses a 2024 IMDb dataset of over 4,000 titles from Kaggle, preprocesses and normalizes the data, and employs cosine similarity with fuzzy matching; a simple Tkinter GUI lets users get recommendations.</p>
+        </div>
+        <div class="project-card">
+          <h3>SP500AnalyzedtoX</h3>
+          <p>Automatically analyses all S&amp;P 500 stocks (as of Aug 2024) by collecting ten‑year price data, financial statements and macroeconomic indicators via yFinance and FredAPI. It computes metrics such as average price, returns, beta and R² scores, performs dividend and ratio analyses and exposes the results through CSV files and a simple Flask API.</p>
+        </div>
+        <div class="project-card">
+          <h3>Regression‑Analysis‑Comparison</h3>
+          <p>Compares regression models—linear, lasso, XGBoost, ARIMA and random forest—on S&amp;P 500 stock prices using macroeconomic indicators like unemployment rate and federal funds rate. The 2012‑2023 monthly dataset is used to evaluate model performance (MSE and R²); linear regression emerged as the most effective.</p>
+        </div>
+        <div class="project-card">
+          <h3>I‑Zaifa</h3>
+          <p>GitHub profile README where Huzaifa introduces himself, notes his interest in machine learning (NLP, supervised and unsupervised methods) and invites contact for collaboration.</p>
+        </div>
+        <div class="project-card">
+          <h3>PneumoniaDectection</h3>
+          <p>A chest X‑ray classification project that uses transfer learning with a pretrained ResNet‑50 model in PyTorch to distinguish between normal and pneumonia scans. Data is split into training, validation and test sets, and the best‑performing model is saved.</p>
+        </div>
+        <div class="project-card">
+          <h3>BrainTumorMRIClassification</h3>
+          <p>Image classification CNN built with PyTorch to categorize MRI scans into glioma, meningioma, pituitary tumour or normal. Uses a Kaggle dataset (~3,500 images), preprocesses and splits the data, trains for several hundred epochs and reports ~91% test accuracy.</p>
+        </div>
+        <div class="project-card">
+          <h3>LinearRegressionSentimentAnalysis</h3>
+          <p>A learning project combining Microsoft stock opening prices with sentiment analysis of news headlines (using NLTK) from Feb 2022–Dec 2023. The data is gathered via Alpha Vantage API, sentiment scores computed and combined with stock data; a linear regression model predicts closing prices, achieving an R² around 0.84 despite high MSE.</p>
+        </div>
+        <div class="project-card">
+          <h3>Spotify2023DataVisualization</h3>
+          <p>Visualizes the most streamed Spotify songs of 2023 in a Jupyter Notebook using pandas, Matplotlib and Seaborn. The notebook analyses song attributes and popularity across months and charts using data from Kaggle’s Top Spotify Songs 2023 dataset.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="languages">
+      <h2>Languages</h2>
+      <ul class="languages-list">
+        <li>Urdu – fluent</li>
+        <li>English – fluent</li>
+        <li>French – learning in progress</li>
       </ul>
-      <button id="themeToggle" class="ml-4 p-2 rounded-md border border-accent text-accent hover:bg-accent hover:text-base transition-colors" title="toggle theme">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 18a6 6 0 110-12 6 6 0 010 12zm0-16a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zm0 18a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zm11-9a1 1 0 010 2h-2a1 1 0 110-2h2zM5 11a1 1 0 010 2H3a1 1 0 110-2h2zm14.657-7.657a1 1 0 011.414 1.414L20.414 6.414a1 1 0 11-1.414-1.414l1.657-1.657zM4.343 17.657a1 1 0 011.414 1.414L4.1 20.414a1 1 0 11-1.414-1.414l1.657-1.657zM4.343 4.343a1 1 0 011.414 0L7.414 6.0a1 1 0 01-1.414 1.414L4.343 5.757a1 1 0 010-1.414zm15.557 13.314a1 1 0 011.414 0l1.657 1.657a1 1 0 01-1.414 1.414l-1.657-1.657a1 1 0 010-1.414z"/></svg>
-      </button>
-    </div>
-  </nav>
-
-  <main class="pt-28 md:pt-32 max-w-7xl mx-auto px-6">
-
-    <!-- =========================== HERO ============================ -->
-    <section class="my-28 text-center">
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-accent mb-6 leading-tight">Markets Through a Data Lens</h1>
-      <p class="text-lg sm:text-xl max-w-3xl mx-auto">Self‑taught machine‑learning practitioner and final‑year Economics &amp; Finance student turning messy datasets into actionable market insight.</p>
-      <div class="mt-10 flex justify-center gap-4 flex-wrap font-mono text-sm">
-        <a href="https://github.com/I-Zaifa"             target="_blank" class="px-4 py-2 border border-accent rounded shadow-soft hover:bg-accent hover:text-base transition-colors">GitHub</a>
-        <a href="https://linkedin.com/in/huzaifatariq33" target="_blank" class="px-4 py-2 border border-accent rounded shadow-soft hover:bg-accent hover:text-base transition-colors">LinkedIn</a>
-        <a href="mailto:huzaifazerothree@gmail.com"                   class="px-4 py-2 border border-accent rounded shadow-soft hover:bg-accent hover:text-base transition-colors">Email</a>
-      </div>
     </section>
 
-    <!-- ========================== COUNTERS ========================= -->
-    <section class="my-24 grid sm:grid-cols-3 gap-10 text-center">
-      <div class="bg-surface border border-muted rounded-xl p-6 shadow-soft">
-        <div id="counter-hours"  class="text-4xl font-extrabold text-accent mb-2">0</div>
-        <p class="uppercase tracking-wide text-gray-400 text-sm">Hours Self‑Study</p>
-      </div>
-      <div class="bg-surface border border-muted rounded-xl p-6 shadow-soft">
-        <div id="counter-lines"  class="text-4xl font-extrabold text-accent mb-2">0</div>
-        <p class="uppercase tracking-wide text-gray-400 text-sm">Lines of Code</p>
-      </div>
-      <div class="bg-surface border border-muted rounded-xl p-6 shadow-soft">
-        <div id="counter-models" class="text-4xl font-extrabold text-accent mb-2">0</div>
-        <p class="uppercase tracking-wide text-gray-400 text-sm">Models Trained</p>
-      </div>
+    <section id="interests">
+      <h2>Interests</h2>
+      <ul class="interests-list">
+        <li>Movies</li>
+        <li>Gaming</li>
+        <li>Messing about in Python</li>
+      </ul>
     </section>
 
-    <!-- ============================ ABOUT ========================== -->
-    <section id="about" class="my-28">
-      <h2 class="text-3xl sm:text-4xl font-bold text-accent mb-10">About Me</h2>
-      <p class="text-lg leading-8 max-w-4xl">
-        Islamabad‑born, forged in online forums and open‑source repos. I built my own curriculum when coursework lagged—blending programming, statistics, and economic theory into a toolkit for decoding markets. Whether prototyping in Jupyter or refining research in LaTeX, I pursue a single metric: <em>clarity that informs action</em>.
-      </p>
-      <p class="mt-6 text-lg max-w-4xl">
-        Off‑hours, you’ll find me over‑analyzing game economies, caffeinating past midnight, or speed‑reading financial history for deeper context.
-      </p>
-    </section>
-
-    <!-- ============================ SKILLS ========================= -->
-    <section id="skills" class="my-28">
-      <h2 class="text-3xl sm:text-4xl font-bold text-accent mb-12">Skill Stack</h2>
-      <div class="grid lg:grid-cols-3 gap-12">
-        <div>
-          <h3 class="text-xl font-semibold mb-4">Programming · Data Science</h3>
-          <ul class="space-y-3">
-            <li class="flex justify-between"><span>Python</span><span class="font-mono">★★★★★</span></li>
-            <li class="flex justify-between"><span>pandas &amp; NumPy</span><span class="font-mono">★★★★★</span></li>
-            <li class="flex justify-between"><span>scikit‑learn</span><span class="font-mono">★★★★☆</span></li>
-            <li class="flex justify-between"><span>PyTorch</span><span class="font-mono">★★★☆☆</span></li>
-            <li class="flex justify-between"><span>Plotly / matplotlib</span><span class="font-mono">★★★★☆</span></li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="text-xl font-semibold mb-4">Economics · Finance</h3>
-          <ul class="list-disc list-inside space-y-2">
-            <li>Time‑series econometrics</li>
-            <li>Macro modelling (DSGE)</li>
-            <li>Risk metrics (VaR, CVaR)</li>
-            <li>Equity valuation &amp; DCF</li>
-            <li>Portfolio theory &amp; CAPM</li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="text-xl font-semibold mb-4">Tools &amp; Workflow</h3>
-          <ul class="list-disc list-inside space-y-2">
-            <li>VS Code · Jupyter</li>
-            <li>Git &amp; GitHub Actions</li>
-            <li>Docker (basic)</li>
-            <li>Linux/WSL</li>
-            <li>LaTeX for publications</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================ PROJECTS ======================= -->
-    <section id="projects" class="my-28">
-      <h2 class="text-3xl sm:text-4xl font-bold text-accent mb-12">Featured Work</h2>
-      <p class="mb-6 text-gray-400">Click a card for details.</p>
-      <div class="space-y-8">
-        <!-- SP500AnalyzedtoX -->
-        <article class="project-card bg-surface border border-muted rounded-2xl p-8 shadow-soft cursor-pointer transition-transform hover:scale-[1.02]" onclick="toggleProject('sp500')">
-          <header class="flex justify-between items-center">
-            <h3 class="text-2xl font-semibold">SP500AnalyzedtoX</h3>
-            <span id="sp500-icon" class="text-accent text-xl">▼</span>
-          </header>
-          <div id="sp500" class="mt-4">
-            <p>An end‑to‑end toolkit dissecting S&amp;P 500 behaviour with macro overlay, anomaly detection, and Monte Carlo scenario stress‑testing. Interactive dashboards built with Plotly.</p>
-            <p class="mt-2"><span class="font-semibold">Stack:</span> Python · pandas · scikit‑learn · Plotly · statsmodels</p>
-            <a href="https://github.com/I-Zaifa/SP500AnalyzedtoX" target="_blank" class="inline-block mt-2 underline link-accent">View Repository</a>
-          </div>
-        </article>
-        <!-- Regression Comparison -->
-        <article class="project-card bg-surface border border-muted rounded-2xl p-8 shadow-soft cursor-pointer transition-transform hover:scale-[1.02]" onclick="toggleProject('reg')">
-          <header class="flex justify-between items-center">
-            <h3 class="text-xl font-semibold">Regression Analysis Comparison</h3>
-            <span id="reg-icon" class="text-accent text-xl">▶</span>
-          </header>
-          <div id="reg" class="mt-4 hidden">
-            <p>Benchmarked Linear, Lasso, Random Forest, XGBoost &amp; ARIMA models against macro factors to stress performance across differing economic regimes.</p>
-            <a href="https://github.com/I-Zaifa/Regression-Analysis-Comparison" target="_blank" class="inline-block mt-2 underline link-accent">View Repository</a>
-          </div>
-        </article>
-        <!-- Sentiment × Linear Regression -->
-        <article class="project-card bg-surface border border-muted rounded-2xl p-8 shadow-soft cursor-pointer transition-transform hover:scale-[1.02]" onclick="toggleProject('sent')">
-          <header class="flex justify-between items-center">
-            <h3 class="text-xl font-semibold">Sentiment × Linear Regression</h3>
-            <span id="sent-icon" class="text-accent text-xl">▶</span>
-          </header>
-          <div id="sent" class="mt-4 hidden">
-            <p>NLP‑driven sentiment scoring on financial news combined with linear regression on price data for enhanced trading signals.</p>
-            <a href="https://github.com/I-Zaifa/LinearRegressionSentimentAnalysis" target="_blank" class="inline-block mt-2 underline link-accent">View Repository</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ============================ JOURNEY ======================== -->
-    <section id="journey" class="my-28">
-      <h2 class="text-3xl sm:text-4xl font-bold text-accent mb-12">Learning Journey</h2>
-      <ol class="relative border-l border-accent pl-6 space-y-10">
-        <li>
-          <div class="absolute -left-3 top-0 w-3 h-3 bg-accent rounded-full"></div>
-          <time class="text-accent font-semibold">2021</time>
-          <p class="mt-2">Discovered Python via free MOOCs; automated tedious finance homework scripts.</p>
-        </li>
-        <li>
-          <div class="absolute -left-3 top-0 w-3 h-3 bg-accent rounded-full"></div>
-          <time class="text-accent font-semibold">2022</time>
-          <p class="mt-2">Dove into machine learning—completed fast.ai, built my first stock‑price predictor (terrible MSE, great lesson).</p>
-        </li>
-        <li>
-          <div class="absolute -left-3 top-0 w-3 h-3 bg-accent rounded-full"></div>
-          <time class="text-accent font-semibold">2023</time>
-          <p class="mt-2">Published a research poster on macro indicators vs. equities; launched SP500AnalyzedtoX.</p>
-        </li>
-        <li>
-          <div class="absolute -left-3 top-0 w-3 h-3 bg-accent rounded-full"></div>
-          <time class="text-accent font-semibold">2024–25</time>
-          <p class="mt-2">Exploring NLP sentiment + time‑series fusion while finishing B.S. thesis on ML‑driven macro forecasting.</p>
-        </li>
-      </ol>
-    </section>
-
-    <!-- ============================ EDUCATION ===================== -->
-    <section id="education" class="my-28">
-      <h2 class="text-3xl sm:text-4xl font-bold text-accent mb-12">Education</h2>
-      <div class="bg-surface border border-muted rounded-xl p-8 shadow-soft">
-        <p class="text-lg font-semibold">B.S. Economics &amp; Finance — NUML University, Islamabad</p>
-        <p class="text-sm text-gray-400">Expected 2025 · CGPA 3.8</p>
-        <p class="mt-3">Key courses: Quantitative Methods, Econometrics, Machine Learning for Finance, Corporate Finance, Applied Statistics.</p>
-      </div>
-    </section>
-
-    <!-- ============================ CONTACT ======================= -->
-    <section id="contact" class="my-28">
-      <h2 class="text-3xl sm:text-4xl font-bold text-accent mb-8">Contact</h2>
-      <div class="bg-surface border border-muted rounded-xl p-8 shadow-soft">
-        <p class="mb-4">Have an idea, research collaboration, or role where data science meets finance? Drop me a line—let’s build something impactful.</p>
-        <a href="mailto:huzaifazerothree@gmail.com" class="font-mono underline text-accent text-lg">huzaifazerothree@gmail.com</a>
-      </div>
+    <section id="contact">
+      <h2>Contact</h2>
+      <a class="contact-btn" href="#" data-email="huzaifazerothree@gmail.com">Email Me</a>
     </section>
   </main>
-
-  <!-- ============================ FOOTER ======================== -->
-  <footer class="text-center text-xs text-gray-500 py-10 border-t border-muted">
-    © 2025 Huzaifa — Crafted with black coffee &amp; Tailwind.
-  </footer>
-
-  <!-- ============================ SCRIPTS ======================= -->
-  <script>
-    /* Theme toggle --------------------------------------------------- */
-    const htmlEl = document.documentElement;
-    const themeToggle = document.getElementById('themeToggle');
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme === 'light') htmlEl.classList.remove('dark');
-    themeToggle.addEventListener('click', () => {
-      htmlEl.classList.toggle('dark');
-      localStorage.setItem('theme', htmlEl.classList.contains('dark') ? 'dark' : 'light');
+  <aside>
+    <h2>Links</h2>
+    <ul>
+      <li><a href="https://github.com/I-Zaifa" target="_blank" rel="noopener">GitHub Profile</a></li>
+      <li><a href="https://linkedin.com/in/huzaifatariq33" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><strong>Repositories</strong></li>
+      <li><a href="https://github.com/I-Zaifa/MHT-Portfolio" target="_blank" rel="noopener">MHT‑Portfolio</a></li>
+      <li><a href="https://github.com/I-Zaifa/MovieRecommendation4000" target="_blank" rel="noopener">MovieRecommendation4000</a></li>
+      <li><a href="https://github.com/I-Zaifa/SP500AnalyzedtoX" target="_blank" rel="noopener">SP500AnalyzedtoX</a></li>
+      <li><a href="https://github.com/I-Zaifa/Regression-Analysis-Comparison" target="_blank" rel="noopener">Regression‑Analysis‑Comparison</a></li>
+      <li><a href="https://github.com/I-Zaifa/I-Zaifa" target="_blank" rel="noopener">I‑Zaifa</a></li>
+      <li><a href="https://github.com/I-Zaifa/PneumoniaDectection" target="_blank" rel="noopener">PneumoniaDectection</a></li>
+      <li><a href="https://github.com/I-Zaifa/BrainTumorMRIClassification" target="_blank" rel="noopener">BrainTumorMRIClassification</a></li>
+      <li><a href="https://github.com/I-Zaifa/LinearRegressionSentimentAnalysis" target="_blank" rel="noopener">LinearRegressionSentimentAnalysis</a></li>
+      <li><a href="https://github.com/I-Zaifa/Spotify2023DataVisualization" target="_blank" rel="noopener">Spotify2023DataVisualization</a></li>
+    </ul>
+  </aside>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const btn = document.querySelector(".contact-btn");
+    btn.addEventListener("click", function(e) {
+      e.preventDefault();
+      const email = this.getAttribute("data-email");
+      const url = "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(email);
+      window.open(url, "_blank");
     });
-
-    /* Counters ------------------------------------------------------- */
-    const counters = [
-      { id: 'counter-hours',  target: 4000 },
-      { id: 'counter-lines',  target: 120000 },
-      { id: 'counter-models', target: 85 },
-    ];
-    const duration = 2000;
-    counters.forEach(({ id, target }) => {
-      const el = document.getElementById(id);
-      let start = 0;
-      const incr = target / (duration / 16);
-      const tick = () => {
-        start += incr;
-        if (start < target) {
-          el.textContent = Math.floor(start);
-          requestAnimationFrame(tick);
-        } else {
-          el.textContent = target.toLocaleString();
-        }
-      };
-      tick();
-    });
-
-    /* Project accordion --------------------------------------------- */
-    function toggleProject(key) {
-      const detail = document.getElementById(key);
-      const icon   = document.getElementById(key + '-icon');
-      const isHidden = detail.classList.toggle('hidden');
-      icon.textContent = isHidden ? '▶' : '▼';
-    }
-  </script>
+  });
+</script>
 </body>
 </html>
